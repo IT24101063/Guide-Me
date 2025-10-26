@@ -1,0 +1,73 @@
+<div class="card shadow-sm">
+  <div class="card-header"><h5 class="mb-0">Edit Tour</h5></div>
+  <div class="card-body" *ngIf="!loading; else loadingTpl">
+    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+      
+      <!-- Title -->
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input formControlName="title" class="form-control" />
+        <div class="text-danger small" *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
+          Title is required.
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea formControlName="description" class="form-control" rows="3"></textarea>
+        <div class="text-danger small" *ngIf="form.get('description')?.touched && form.get('description')?.hasError('required')">
+          Description is required.
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Location -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Location</label>
+          <input formControlName="location" class="form-control" />
+          <div class="text-danger small" *ngIf="form.get('location')?.touched && form.get('location')?.hasError('required')">
+            Location is required.
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="col-md-3 mb-3">
+          <label class="form-label">Price</label>
+          <input type="number" formControlName="price" class="form-control" />
+          <div class="text-danger small" *ngIf="form.get('price')?.touched">
+            <span *ngIf="form.get('price')?.hasError('required')">Price is required.</span>
+            <span *ngIf="form.get('price')?.hasError('min')">Price must be greater than 0.</span>
+          </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="col-md-3 mb-3">
+          <label class="form-label">Duration (days)</label>
+          <input type="number" formControlName="durationDays" class="form-control" />
+          <div class="text-danger small" *ngIf="form.get('durationDays')?.touched">
+            <span *ngIf="form.get('durationDays')?.hasError('required')">Duration is required.</span>
+            <span *ngIf="form.get('durationDays')?.hasError('min')">Must be at least 1 day.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Date -->
+      <div class="mb-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" formControlName="startDate" class="form-control" />
+        <div class="text-danger small" *ngIf="form.get('startDate')?.touched && form.get('startDate')?.hasError('required')">
+          Start date is required.
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn btn-primary" [disabled]="saving">{{ saving ? 'Saving...' : 'Save' }}</button>
+      <a class="btn btn-link" routerLink="/tours">Cancel</a>
+    </form>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="p-4 text-center">Loading...</div>
+  </ng-template>
+</div>

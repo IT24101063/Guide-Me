@@ -1,0 +1,20 @@
+<div *ngIf="loading" class="text-center p-4">Loading...</div>
+<div *ngIf="tour" class="card shadow-sm">
+  <div class="row g-0">
+    <div class="col-md-7">
+      <div class="card-body">
+        <h3>{{ tour.title }} - ( {{ tour.location }} )</h3>
+        <p>{{ tour.description }}</p>
+        <div class="mb-2 text-muted">Duration : {{ tour.durationDays || 'N/A' }} days</div>
+        <div class="mb-2 text-muted">Start Date : {{ tour.startDate || 'N/A' }} </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="fs-5 fw-bold">LKR {{ tour.price }}</div>
+          <div>
+            <a [routerLink]="['/tours', tour.id, 'edit']" class="btn btn-primary me-2">Edit</a>
+            <a routerLink="/tours" class="btn btn-outline-secondary">Back</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

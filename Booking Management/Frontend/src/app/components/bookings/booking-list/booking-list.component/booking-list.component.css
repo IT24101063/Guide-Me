@@ -1,0 +1,25 @@
+/* Colorful card background */
+.colorful-card {
+  background: linear-gradient(135deg, #f8f5ec 0%, #f1f1f1 25%, #f4fce1 100%);
+  border-radius: 12px;
+}
+.booking-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(12, 15, 30, 0.06);
+}
+.view-btn {
+  position: absolute;
+  right: 10px;
+}
+/* status badges */
+.status-badge {
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.badge-confirmed { background: linear-gradient(90deg,#28a745,#8ae58a); color: #fff; }
+.badge-pending { background: linear-gradient(90deg,#ffc107,#ffd57e); color: #222; }
+.badge-cancelled { background: linear-gradient(90deg,#dc3545,#ff7b7b); color: #fff; }
+.badge-default { background: #e9ecef; color: #333; }

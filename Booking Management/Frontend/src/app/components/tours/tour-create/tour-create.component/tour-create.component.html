@@ -1,0 +1,51 @@
+<div class="card shadow-sm">
+  <div class="card-header"><h5 class="mb-0">Create Tour</h5></div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input formControlName="title" class="form-control" />
+        <div *ngIf="form.controls['title'].touched && form.controls['title'].invalid" class="text-danger small">Title required (min 3).</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea formControlName="description" rows="3" class="form-control"></textarea>
+         <div *ngIf="form.controls['description'].touched && form.controls['description'].invalid" class="text-danger small">Description required</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Location</label>
+          <input formControlName="location" class="form-control" />
+           <div *ngIf="form.controls['location'].touched && form.controls['location'].invalid" class="text-danger small">Location required.</div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label class="form-label">Price (LKR)</label>
+          <input type="number" formControlName="price" class="form-control" />
+           <div *ngIf="form.controls['price'].touched && form.controls['price'].invalid" class="text-danger small">Price required.</div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label class="form-label">Duration (days)</label>
+          <input type="number" formControlName="durationDays" class="form-control" />
+          <div *ngIf="form.controls['durationDays'].touched && form.controls['durationDays'].invalid" class="text-danger small">Duration required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" formControlName="startDate" class="form-control" />
+        <div *ngIf="form.controls['startDate'].touched && form.controls['startDate'].invalid" class="text-danger small">Start date required</div>
+      </div>
+
+      <!-- <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input formControlName="imageUrl" class="form-control" placeholder="https://..." />
+      </div> -->
+
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      <button class="btn btn-primary" [disabled]="saving">{{ saving ? 'Saving...' : 'Create Tour' }}</button>
+      <a class="btn btn-link" routerLink="/tours">Cancel</a>
+    </form>
+  </div>
+</div>

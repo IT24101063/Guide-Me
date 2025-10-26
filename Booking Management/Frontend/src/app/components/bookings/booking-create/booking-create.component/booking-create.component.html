@@ -1,0 +1,68 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0 create-card p-4">
+    <h3>Create Booking</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="mt-3">
+      <div class="row g-3">
+
+        <!-- Tourist -->
+        <div class="col-md-6">
+          <label class="form-label">Tourist</label>
+          <select class="form-select" formControlName="touristId">
+            <option [ngValue]="null">-- choose --</option>
+            <option *ngFor="let u of users" [ngValue]="u.id">{{ u.fullName }} - {{ u.email }}</option>
+          </select>
+          <div class="text-danger small mt-1"
+              *ngIf="form.get('touristId')?.touched && form.get('touristId')?.invalid">
+            Please select a tourist.
+          </div>
+        </div>
+
+        <!-- Tour -->
+        <div class="col-md-6">
+          <label class="form-label">Tour</label>
+          <select class="form-select" formControlName="tourId">
+            <option [ngValue]="null">-- choose --</option>
+            <option *ngFor="let t of tours" [ngValue]="t.id">{{ t.title }} — USD {{ t.price }}</option>
+          </select>
+          <div class="text-danger small mt-1"
+              *ngIf="form.get('tourId')?.touched && form.get('tourId')?.invalid">
+            Please select a tour.
+          </div>
+        </div>
+
+        <!-- Booking Date -->
+        <div class="col-md-4">
+          <label class="form-label">Booking Date</label>
+          <input type="date" class="form-control" formControlName="bookingDate" />
+          <div class="text-danger small mt-1"
+              *ngIf="form.get('bookingDate')?.touched && form.get('bookingDate')?.invalid">
+            Booking date is required.
+          </div>
+        </div>
+
+        <!-- Guests -->
+        <div class="col-md-4">
+          <label class="form-label">Guests</label>
+          <input type="number" min="1" class="form-control" formControlName="guestsCount" />
+          <div class="text-danger small mt-1"
+              *ngIf="form.get('guestsCount')?.touched && form.get('guestsCount')?.invalid">
+            Must have at least 1 guest.
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-md-12 text-end mt-3">
+          <button class="btn btn-outline-secondary me-2" type="button" [routerLink]="['/bookings']">
+            Cancel
+          </button>
+          <button class="btn btn-success" type="submit" [disabled]="submitting">
+            {{ submitting ? 'Creating...' : 'Create' }}
+          </button>
+        </div>
+
+      </div>
+    </form>
+
+    <div *ngIf="message" class="mt-3 alert alert-warning">{{ message }}</div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.detail-card {
+  background: linear-gradient(135deg,#f8f5f1 0%, #f5f2f2 100%);
+  border-radius: 12px;
+}
+.qr-payload {
+  background: #f8f9fa;
+  padding: .75rem;
+  border-radius: 8px;
+}
+.status-badge {
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  color: white;
+}
+.badge-confirmed { background: #28a745; }
+.badge-cancelled { background: #dc3545; }
+.badge-pending { background: #ffc107; color: #222; }
+.badge-default { background: #6c757d; }
