@@ -1,0 +1,88 @@
+<div class="card shadow-sm">
+  <div class="card-header">
+    <h5 class="mb-0">Edit Booking</h5>
+  </div>
+
+  <div class="card-body" *ngIf="!loading; else loadingTpl">
+    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+      <div class="row">
+        <!-- Tour Title -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Tour</label>
+          <select formControlName="tourId" class="form-select">
+            <option value="" disabled>Select a tour</option>
+            <option *ngFor="let tour of tours" [value]="tour.id">
+              {{ tour.title }}
+            </option>
+          </select>
+          <div
+            class="text-danger small"
+            *ngIf="form.get('tourId')?.touched && form.get('tourId')?.hasError('required')"
+          >
+            Tour is required.
+          </div>
+        </div>
+
+       <!-- Tour Guide -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Tour Guide</label>
+            <select formControlName="fullName" class="form-select">
+                <option value="" disabled>Select a tour guide</option>
+                <option *ngFor="let guide of guides" [value]="guide.fullName">
+                {{ guide.fullName }}
+                </option>
+            </select>
+            <div
+                class="text-danger small"
+                *ngIf="form.get('touristId')?.touched && form.get('touristId')?.hasError('required')"
+            >
+                Tour guide is required.
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Booking Date -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Booking Date</label>
+          <input type="date" formControlName="bookingDate" class="form-control" />
+          <div
+            class="text-danger small"
+            *ngIf="form.get('bookingDate')?.touched && form.get('bookingDate')?.hasError('required')"
+          >
+            Booking date is required.
+          </div>
+        </div>
+
+        <!-- Guests Count -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Guests</label>
+          <input
+            type="number"
+            formControlName="guestsCount"
+            class="form-control"
+            min="1"
+          />
+          <div class="text-danger small" *ngIf="form.get('guestsCount')?.touched">
+            <span *ngIf="form.get('guestsCount')?.hasError('required')">
+              Guests count is required.
+            </span>
+            <span *ngIf="form.get('guestsCount')?.hasError('min')">
+              Guests count must be greater than 0.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Save' }}
+      </button>
+      <a class="btn btn-link" routerLink="/bookings">Cancel</a>
+    </form>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="p-4 text-center">Loading...</div>
+  </ng-template>
+</div>

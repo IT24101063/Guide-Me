@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <div class="card shadow-lg border-0 colorful-card">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-3">
+        <h3 class="me-auto mb-0">Bookings</h3>
+        <button class="btn btn-lg btn-primary ms-3" (click)="goCreate()">
+          New Booking
+        </button>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input class="form-control" placeholder="Search by ref, tour or QR..." [(ngModel)]="q" (ngModelChange)="applyFilters()" />
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+            <option value="ALL">All status</option>
+            <option>CONFIRMED</option>
+            <option>PENDING</option>
+            <option>CANCELLED</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="filtered.length===0" class="text-center text-muted py-5">
+        No bookings found — try creating one.
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6" *ngFor="let b of filtered">
+          <div class="booking-card p-3 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="mb-0">{{ b.tourTitle || '—' }}</h5>
+                <small class="text-muted">Ref: {{ b.bookingRef }}</small>
+              </div>
+              <div>
+                <span class="badge status-badge" [ngClass]="getStatusClass(b.status)">{{ b.status || '—' }}</span>
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <p class="mb-1">
+                <strong>When:</strong> {{ b.bookingDate }} 
+              </p>
+               <p class="mb-1">
+                <strong>Guests:</strong> {{ b.guestsCount }}
+              </p>
+              <p class="mb-1"><strong>Total:</strong> LKR {{ b.totalAmount }}</p>
+              <!-- <p class="mb-0 text-truncate"><small>{{ b.qrCodeData }}</small></p> -->
+            </div>
+
+            <div class="position-relative" style="min-height: 0px;"> 
+              <div class="position-absolute bottom-0 end-0 mb-2 me-2"> 
+                <button 
+                  class="btn btn-outline-primary btn-sm" 
+                  (click)="view(b)" 
+                  [disabled]="b.status === 'CANCELLED'">
+                  View
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

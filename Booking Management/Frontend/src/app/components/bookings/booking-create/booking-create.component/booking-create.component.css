@@ -1,0 +1,5 @@
+.create-card {
+  background: linear-gradient(135deg,#f7f8ff 0%, #e6f7ff 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
